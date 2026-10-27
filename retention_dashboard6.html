@@ -1,0 +1,1200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI-Powered Employee Retention & Automation Dashboard</title>
+  <script src="https://www.gstatic.com/antigravity/web/dev/tailwindcss.min.js"></script>
+  <style>
+    /* Custom scrollbar & animations */
+    ::-webkit-scrollbar { width: 6px; height: 6px; }
+    ::-webkit-scrollbar-track { background: var(--card, #1e293b); }
+    ::-webkit-scrollbar-thumb { background: var(--border, #475569); border-radius: 3px; }
+    .badge-high { background-color: rgba(239, 68, 68, 0.15); color: #ef4444; border: 1px solid rgba(239, 68, 68, 0.3); }
+    .badge-med { background-color: rgba(245, 158, 11, 0.15); color: #f59e0b; border: 1px solid rgba(245, 158, 11, 0.3); }
+    .badge-low { background-color: rgba(16, 185, 129, 0.15); color: #10b981; border: 1px solid rgba(16, 185, 129, 0.3); }
+    .tab-btn.active { border-bottom: 2px solid #3b82f6; color: #3b82f6; font-weight: 600; }
+  </style>
+</head>
+<body class="bg-[var(--background,#0f172a)] text-[var(--foreground,#f8fafc)] antialiased min-h-screen p-4 md:p-6 font-sans">
+  
+  <!-- Header / Navigation Bar -->
+  <header class="mb-6 flex flex-col md:flex-row md:items-center md:justify-between gap-4 border-b border-[var(--border,#334155)] pb-5">
+    <div>
+      <div class="flex items-center gap-3">
+        <span class="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-blue-600/20 text-blue-400 border border-blue-500/30">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
+          </svg>
+        </span>
+        <div>
+          <h1 class="text-xl md:text-2xl font-bold tracking-tight">AI Employee Retention & Root-Cause Intelligence Agent</h1>
+          <p class="text-xs md:text-sm text-[var(--muted-foreground,#94a3b8)]">Automated Machine Learning (XGBoost) • SHAP Explainable AI • Prescriptive Interventions</p>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Model & System Badges -->
+    <div class="flex items-center flex-wrap gap-2 text-xs">
+      <span class="px-2.5 py-1 rounded-full bg-blue-500/10 text-blue-400 border border-blue-500/20 flex items-center gap-1.5">
+        <span class="w-2 h-2 rounded-full bg-blue-400 animate-pulse"></span>
+        Champion: XGBoost Classifier
+      </span>
+      <span class="px-2.5 py-1 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">ROC-AUC: 0.8735</span>
+      <span class="px-2.5 py-1 rounded-full bg-indigo-500/10 text-indigo-400 border border-indigo-500/20">Recall: 68.7%</span>
+      <span class="px-2.5 py-1 rounded-full bg-purple-500/10 text-purple-400 border border-purple-500/20">Active Headcount: 350</span>
+    </div>
+  </header>
+
+  <!-- Executive KPI Overview Grid -->
+  <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3 md:gap-4 mb-6">
+    <div class="bg-[var(--card,#1e293b)] border border-[var(--border,#334155)] rounded-xl p-4 shadow-sm">
+      <p class="text-xs text-[var(--muted-foreground,#94a3b8)] font-medium">Monitored Workforce</p>
+      <div class="flex items-baseline justify-between mt-1">
+        <h3 class="text-2xl font-bold text-white">350</h3>
+        <span class="text-xs font-semibold text-emerald-400">100% Active</span>
+      </div>
+      <p class="text-[11px] text-[var(--muted-foreground,#94a3b8)] mt-1">8 Enterprise Depts</p>
+    </div>
+
+    <div class="bg-[var(--card,#1e293b)] border border-[var(--border,#334155)] rounded-xl p-4 shadow-sm">
+      <p class="text-xs text-[var(--muted-foreground,#94a3b8)] font-medium">High Flight Risk</p>
+      <div class="flex items-baseline justify-between mt-1">
+        <h3 class="text-2xl font-bold text-rose-400">80</h3>
+        <span class="text-xs font-semibold text-rose-400">22.9%</span>
+      </div>
+      <p class="text-[11px] text-[var(--muted-foreground,#94a3b8)] mt-1">>65% model probability</p>
+    </div>
+
+    <div class="bg-[var(--card,#1e293b)] border border-[var(--border,#334155)] rounded-xl p-4 shadow-sm">
+      <p class="text-xs text-[var(--muted-foreground,#94a3b8)] font-medium">At-Risk Replacement Cost</p>
+      <div class="flex items-baseline justify-between mt-1">
+        <h3 class="text-xl md:text-2xl font-bold text-amber-300">$7.04M</h3>
+        <span class="text-xs font-semibold text-amber-400">75% sal</span>
+      </div>
+      <p class="text-[11px] text-[var(--muted-foreground,#94a3b8)] mt-1">Recruitment + vacancy loss</p>
+    </div>
+
+    <div class="bg-[var(--card,#1e293b)] border border-[var(--border,#334155)] rounded-xl p-4 shadow-sm">
+      <p class="text-xs text-[var(--muted-foreground,#94a3b8)] font-medium">Retention Budget Plan</p>
+      <div class="flex items-baseline justify-between mt-1">
+        <h3 class="text-2xl font-bold text-blue-400">$1.21M</h3>
+        <span class="text-xs font-semibold text-blue-300">Playbook</span>
+      </div>
+      <p class="text-[11px] text-[var(--muted-foreground,#94a3b8)] mt-1">Comp, L&D, workload relief</p>
+    </div>
+
+    <div class="bg-[var(--card,#1e293b)] border border-[var(--border,#334155)] rounded-xl p-4 shadow-sm">
+      <p class="text-xs text-[var(--muted-foreground,#94a3b8)] font-medium">Net Financial Benefit</p>
+      <div class="flex items-baseline justify-between mt-1">
+        <h3 class="text-2xl font-bold text-emerald-400">$2.76M</h3>
+        <span class="text-xs font-semibold text-emerald-300">Saved</span>
+      </div>
+      <p class="text-[11px] text-[var(--muted-foreground,#94a3b8)] mt-1">Avoided turnover loss</p>
+    </div>
+
+    <div class="bg-[var(--card,#1e293b)] border border-[var(--border,#334155)] rounded-xl p-4 shadow-sm">
+      <p class="text-xs text-[var(--muted-foreground,#94a3b8)] font-medium">Expected Program ROI</p>
+      <div class="flex items-baseline justify-between mt-1">
+        <h3 class="text-2xl font-bold text-purple-400">2.27x</h3>
+        <span class="text-xs font-semibold text-purple-300">+227%</span>
+      </div>
+      <p class="text-[11px] text-[var(--muted-foreground,#94a3b8)] mt-1">Capital return multiple</p>
+    </div>
+  </div>
+
+  <!-- Navigation Tabs -->
+  <div class="flex items-center gap-2 border-b border-[var(--border,#334155)] mb-6 text-sm overflow-x-auto">
+    <button class="tab-btn active pb-3 px-3 transition-colors text-[var(--muted-foreground,#94a3b8)] hover:text-white" onclick="switchTab('registry')">
+      👥 Employee Risk Registry & XAI
+    </button>
+    <button class="tab-btn pb-3 px-3 transition-colors text-[var(--muted-foreground,#94a3b8)] hover:text-white" onclick="switchTab('departments')">
+      🏢 Department Risk Heatmap
+    </button>
+    <button class="tab-btn pb-3 px-3 transition-colors text-[var(--muted-foreground,#94a3b8)] hover:text-white" onclick="switchTab('simulator')">
+      🧪 What-If Scenario Simulator
+    </button>
+    <button class="tab-btn pb-3 px-3 transition-colors text-[var(--muted-foreground,#94a3b8)] hover:text-white" onclick="switchTab('copilot')">
+      🤖 AI Retention Copilot (NLP)
+    </button>
+    <button class="tab-btn pb-3 px-3 transition-colors text-[var(--muted-foreground,#94a3b8)] hover:text-white" onclick="switchTab('playbooks')">
+      📋 Intervention Playbooks
+    </button>
+  </div>
+
+  <!-- TAB 1: Employee Risk Registry & XAI Drawer -->
+  <div id="tab-registry" class="tab-content block">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+      
+      <!-- Left Column: Filterable Employee Table -->
+      <div class="lg:col-span-8 bg-[var(--card,#1e293b)] border border-[var(--border,#334155)] rounded-xl p-4 md:p-5 shadow-sm">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-4">
+          <div>
+            <h2 class="text-base font-semibold text-white">Active Employee Flight-Risk Registry</h2>
+            <p class="text-xs text-[var(--muted-foreground,#94a3b8)]">Click on any employee to inspect SHAP feature attribution & evidence-based action plan</p>
+          </div>
+          
+          <div class="flex items-center gap-2">
+            <input type="text" id="empSearch" placeholder="Search name or ID..." onkeyup="filterEmployees()"
+                   class="bg-[var(--background,#0f172a)] text-xs border border-[var(--border,#334155)] rounded-lg px-3 py-1.5 focus:outline-none focus:border-blue-500 text-white placeholder-slate-500">
+            
+            <select id="tierFilter" onchange="filterEmployees()"
+                    class="bg-[var(--background,#0f172a)] text-xs border border-[var(--border,#334155)] rounded-lg px-2.5 py-1.5 focus:outline-none focus:border-blue-500 text-white">
+              <option value="ALL">All Tiers</option>
+              <option value="High Risk" selected>High Risk (>65%)</option>
+              <option value="Medium Risk">Medium Risk</option>
+              <option value="Low Risk">Low Risk</option>
+            </select>
+
+            <select id="deptFilter" onchange="filterEmployees()"
+                    class="bg-[var(--background,#0f172a)] text-xs border border-[var(--border,#334155)] rounded-lg px-2.5 py-1.5 focus:outline-none focus:border-blue-500 text-white">
+              <option value="ALL">All Departments</option>
+              <option value="Engineering">Engineering</option>
+              <option value="Sales">Sales</option>
+              <option value="Product">Product</option>
+              <option value="Customer Support">Customer Support</option>
+              <option value="Marketing">Marketing</option>
+              <option value="Data & AI">Data & AI</option>
+              <option value="Operations">Operations</option>
+              <option value="HR">HR</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Table Container -->
+        <div class="overflow-x-auto max-h-[520px] overflow-y-auto">
+          <table class="w-full text-left text-xs">
+            <thead class="sticky top-0 bg-[var(--card,#1e293b)] text-[var(--muted-foreground,#94a3b8)] uppercase tracking-wider text-[10px] border-b border-[var(--border,#334155)]">
+              <tr>
+                <th class="py-2.5 px-3">Employee</th>
+                <th class="py-2.5 px-3">Dept / Role</th>
+                <th class="py-2.5 px-2">Risk Score</th>
+                <th class="py-2.5 px-2">Salary</th>
+                <th class="py-2.5 px-3">Primary Root Driver</th>
+                <th class="py-2.5 px-2 text-right">Action</th>
+              </tr>
+            </thead>
+            <tbody id="employeeTableBody" class="divide-y divide-[var(--border,#334155)]">
+              <!-- Dynamically rendered -->
+            </tbody>
+          </table>
+        </div>
+        <div class="mt-3 flex items-center justify-between text-xs text-[var(--muted-foreground,#94a3b8)]">
+          <span id="showingCount">Showing 80 employees</span>
+          <span>Model: XGBoost Calibrated Probability</span>
+        </div>
+      </div>
+
+      <!-- Right Column: Employee Detail & SHAP Feature Attribution Drawer -->
+      <div class="lg:col-span-4 bg-[var(--card,#1e293b)] border border-[var(--border,#334155)] rounded-xl p-4 md:p-5 shadow-sm" id="detailPanel">
+        <div class="flex items-center justify-between border-b border-[var(--border,#334155)] pb-3 mb-4">
+          <div>
+            <span class="text-[10px] font-bold uppercase tracking-wider text-blue-400">Deep-Dive XAI Diagnosis</span>
+            <h3 class="text-base font-bold text-white mt-0.5" id="detailName">Chloe Wilson</h3>
+            <p class="text-xs text-[var(--muted-foreground,#94a3b8)]" id="detailRole">Sales Development Rep • Sales</p>
+          </div>
+          <span class="px-2.5 py-1 text-xs font-bold rounded-full badge-high" id="detailBadge">99.0% High Risk</span>
+        </div>
+
+        <!-- Metrics Strip -->
+        <div class="grid grid-cols-3 gap-2 p-2.5 rounded-lg bg-[var(--background,#0f172a)] text-center text-xs mb-4">
+          <div>
+            <p class="text-[10px] text-[var(--muted-foreground,#94a3b8)]">Salary</p>
+            <p class="font-bold text-white mt-0.5" id="detailSalary">$62,000</p>
+          </div>
+          <div>
+            <p class="text-[10px] text-[var(--muted-foreground,#94a3b8)]">Replacement Exposure</p>
+            <p class="font-bold text-rose-400 mt-0.5" id="detailExposure">$46,500</p>
+          </div>
+          <div>
+            <p class="text-[10px] text-[var(--muted-foreground,#94a3b8)]">Tenure</p>
+            <p class="font-bold text-white mt-0.5" id="detailTenure">1.5 yrs</p>
+          </div>
+        </div>
+
+        <!-- Local SHAP Feature Attribution Waterfall -->
+        <div class="mb-4">
+          <div class="flex items-center justify-between mb-2">
+            <h4 class="text-xs font-semibold text-white">Local SHAP Feature Attribution</h4>
+            <span class="text-[10px] text-[var(--muted-foreground,#94a3b8)]">Log-odds contribution</span>
+          </div>
+          
+          <div class="space-y-2.5" id="shapBarContainer">
+            <!-- SHAP bars dynamically populated -->
+          </div>
+        </div>
+
+        <!-- Automated Evidence-Based Retention Plan -->
+        <div class="border-t border-[var(--border,#334155)] pt-3 mt-4">
+          <div class="flex items-center justify-between mb-2">
+            <h4 class="text-xs font-semibold text-white">Prescribed Retention Interventions</h4>
+            <span class="text-[10px] font-semibold text-emerald-400" id="detailRoi">ROI: 2.1x</span>
+          </div>
+
+          <div class="space-y-2 text-xs" id="interventionList">
+            <!-- Interventions dynamically populated -->
+          </div>
+          
+          <div class="mt-4 pt-3 border-t border-[var(--border,#334155)] flex items-center justify-between text-xs">
+            <div>
+              <span class="text-[10px] text-[var(--muted-foreground,#94a3b8)]">Post-Intervention Risk:</span>
+              <span class="font-bold text-emerald-400 ml-1" id="postRiskScore">14.2%</span>
+            </div>
+            <button onclick="dispatchIntervention()" class="px-3 py-1.5 rounded-lg bg-blue-600 hover:bg-blue-500 text-white font-medium text-xs transition-colors">
+              Dispatch Action Plan
+            </button>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+
+  <!-- TAB 2: Department Risk Heatmap -->
+  <div id="tab-departments" class="tab-content hidden">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+      
+      <!-- Department Overview Cards -->
+      <div class="lg:col-span-8 space-y-4">
+        <div class="bg-[var(--card,#1e293b)] border border-[var(--border,#334155)] rounded-xl p-5 shadow-sm">
+          <div class="flex items-center justify-between mb-4">
+            <div>
+              <h2 class="text-base font-semibold text-white">Department Turnover Risk & Exposure Heatmap</h2>
+              <p class="text-xs text-[var(--muted-foreground,#94a3b8)]">Aggregated predictive turnover scores and replacement risk by operational unit</p>
+            </div>
+            <span class="text-xs text-blue-400 font-medium">8 Departments Active</span>
+          </div>
+
+          <div class="space-y-3" id="departmentListContainer">
+            <!-- Department rows dynamically rendered -->
+          </div>
+        </div>
+      </div>
+
+      <!-- Right Column: Global SHAP Feature Importances -->
+      <div class="lg:col-span-4 bg-[var(--card,#1e293b)] border border-[var(--border,#334155)] rounded-xl p-5 shadow-sm">
+        <h3 class="text-base font-bold text-white mb-1">Company-Wide Risk Drivers</h3>
+        <p class="text-xs text-[var(--muted-foreground,#94a3b8)] mb-4">Global mean |SHAP| values across all 350 active employee records</p>
+
+        <div class="space-y-3" id="globalShapContainer">
+          <!-- Global drivers rendered -->
+        </div>
+
+        <div class="mt-6 p-3 rounded-lg bg-blue-900/20 border border-blue-800/40 text-xs">
+          <p class="font-semibold text-blue-300">💡 Executive Root-Cause Takeaway</p>
+          <p class="text-slate-300 text-[11px] mt-1">
+            Overtime volume (>20 hrs/mo) and below-market salary parity (&lt;0.90x) account for <strong>64.2%</strong> of all predicted flight risk across Engineering and Sales.
+          </p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- TAB 3: What-If Scenario Simulator -->
+  <div id="tab-simulator" class="tab-content hidden">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+      
+      <!-- Interactive Sliders & Policy Controls -->
+      <div class="lg:col-span-6 bg-[var(--card,#1e293b)] border border-[var(--border,#334155)] rounded-xl p-5 shadow-sm">
+        <h2 class="text-base font-semibold text-white mb-1">Counterfactual Scenario Simulator</h2>
+        <p class="text-xs text-[var(--muted-foreground,#94a3b8)] mb-5">Model policy adjustments and calculate real-time reductions in turnover exposure</p>
+
+        <div class="space-y-5">
+          <!-- Control 1 -->
+          <div>
+            <div class="flex justify-between text-xs mb-1.5">
+              <span class="font-medium text-white">1. Overtime Cap & Workload Rebalancing</span>
+              <span class="font-bold text-blue-400" id="sliderOtVal">-50% Overtime</span>
+            </div>
+            <input type="range" min="0" max="100" step="10" value="50" id="sliderOt" oninput="runSimulation()"
+                   class="w-full h-1.5 bg-slate-700 rounded-lg appearance-none cursor-pointer accent-blue-500">
+            <p class="text-[10px] text-[var(--muted-foreground,#94a3b8)] mt-1">Implements mandatory 40-hour caps and redistributes excess projects</p>
+          </div>
+
+          <!-- Control 2 -->
+          <div>
+            <div class="flex justify-between text-xs mb-1.5">
+              <span class="font-medium text-white">2. Below-Market Compensation Realignment</span>
+              <span class="font-bold text-emerald-400" id="sliderCompVal">+10% Salary Parity</span>
+            </div>
+            <input type="range" min="0" max="25" step="5" value="10" id="sliderComp" oninput="runSimulation()"
+                   class="w-full h-1.5 bg-slate-700 rounded-lg appearance-none cursor-pointer accent-emerald-500">
+            <p class="text-[10px] text-[var(--muted-foreground,#94a3b8)] mt-1">Bumps compensation towards 1.05x benchmark for underpaid talent</p>
+          </div>
+
+          <!-- Control 3 -->
+          <div>
+            <div class="flex justify-between text-xs mb-1.5">
+              <span class="font-medium text-white">3. Skip-Level Coaching & Leadership Alignment</span>
+              <span class="font-bold text-purple-400" id="sliderCoachVal">75% Team Coverage</span>
+            </div>
+            <input type="range" min="0" max="100" step="25" value="75" id="sliderCoach" oninput="runSimulation()"
+                   class="w-full h-1.5 bg-slate-700 rounded-lg appearance-none cursor-pointer accent-purple-500">
+            <p class="text-[10px] text-[var(--muted-foreground,#94a3b8)] mt-1">Assigns mentors and director skip-level 1-on-1s for low-engagement teams</p>
+          </div>
+        </div>
+
+        <div class="mt-6 pt-4 border-t border-[var(--border,#334155)] flex justify-between items-center">
+          <button onclick="resetSliders()" class="text-xs text-[var(--muted-foreground,#94a3b8)] hover:text-white transition-colors">
+            Reset to Baseline
+          </button>
+          <span class="text-[11px] text-emerald-400 font-medium">⚡ Real-time ML Inference</span>
+        </div>
+      </div>
+
+      <!-- Simulation Projected Outcome Dashboard -->
+      <div class="lg:col-span-6 bg-[var(--card,#1e293b)] border border-[var(--border,#334155)] rounded-xl p-5 shadow-sm">
+        <h3 class="text-base font-bold text-white mb-1">Projected Strategic Impact</h3>
+        <p class="text-xs text-[var(--muted-foreground,#94a3b8)] mb-5">Estimated headcount preservation and net financial benefit</p>
+
+        <div class="grid grid-cols-2 gap-3 mb-5">
+          <div class="p-3.5 rounded-xl bg-[var(--background,#0f172a)] border border-[var(--border,#334155)]">
+            <p class="text-[11px] text-[var(--muted-foreground,#94a3b8)] font-medium">High-Risk Cohort</p>
+            <div class="flex items-baseline gap-2 mt-1">
+              <h4 class="text-2xl font-bold text-rose-400" id="simHighRisk">38</h4>
+              <span class="text-xs font-semibold text-emerald-400 line-through text-slate-500">80</span>
+              <span class="text-xs font-semibold text-emerald-400" id="simRiskDelta">-42 (-52.5%)</span>
+            </div>
+            <p class="text-[10px] text-[var(--muted-foreground,#94a3b8)] mt-1">Departures preempted</p>
+          </div>
+
+          <div class="p-3.5 rounded-xl bg-[var(--background,#0f172a)] border border-[var(--border,#334155)]">
+            <p class="text-[11px] text-[var(--muted-foreground,#94a3b8)] font-medium">Preserved Headcount</p>
+            <div class="flex items-baseline gap-2 mt-1">
+              <h4 class="text-2xl font-bold text-emerald-400" id="simPreserved">42</h4>
+              <span class="text-xs font-semibold text-emerald-300">Staff saved</span>
+            </div>
+            <p class="text-[10px] text-[var(--muted-foreground,#94a3b8)] mt-1">Direct turnover prevention</p>
+          </div>
+
+          <div class="p-3.5 rounded-xl bg-[var(--background,#0f172a)] border border-[var(--border,#334155)]">
+            <p class="text-[11px] text-[var(--muted-foreground,#94a3b8)] font-medium">Gross Recruitment Savings</p>
+            <div class="flex items-baseline gap-2 mt-1">
+              <h4 class="text-2xl font-bold text-blue-400" id="simSavings">$3.69M</h4>
+            </div>
+            <p class="text-[10px] text-[var(--muted-foreground,#94a3b8)] mt-1">Avoided onboarding & hiring costs</p>
+          </div>
+
+          <div class="p-3.5 rounded-xl bg-[var(--background,#0f172a)] border border-[var(--border,#334155)]">
+            <p class="text-[11px] text-[var(--muted-foreground,#94a3b8)] font-medium">Simulated Net ROI</p>
+            <div class="flex items-baseline gap-2 mt-1">
+              <h4 class="text-2xl font-bold text-purple-400" id="simRoi">2.84x</h4>
+              <span class="text-xs font-semibold text-purple-300">+284%</span>
+            </div>
+            <p class="text-[10px] text-[var(--muted-foreground,#94a3b8)] mt-1">Net return over intervention costs</p>
+          </div>
+        </div>
+
+        <div class="p-3.5 rounded-lg bg-emerald-950/20 border border-emerald-800/40 text-xs">
+          <p class="font-semibold text-emerald-300">🎯 Optimization Recommendation</p>
+          <p class="text-slate-300 text-[11px] mt-1" id="simNarrative">
+            Combining a 50% reduction in peak overtime with a 10% market salary adjustment preserves approximately <strong>42 high-performing employees</strong> and generates <strong>$3,690,000</strong> in retained operational value.
+          </p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- TAB 4: AI Retention Copilot (NLP Query Simulator) -->
+  <div id="tab-copilot" class="tab-content hidden">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+      
+      <!-- Query Interface -->
+      <div class="lg:col-span-5 bg-[var(--card,#1e293b)] border border-[var(--border,#334155)] rounded-xl p-5 shadow-sm">
+        <h2 class="text-base font-semibold text-white mb-1">Interactive HR Intelligence Agent</h2>
+        <p class="text-xs text-[var(--muted-foreground,#94a3b8)] mb-4">Query workforce health, employee diagnosis, or request executive briefings</p>
+
+        <!-- Pre-baked Prompt Suggestions -->
+        <div class="mb-4">
+          <p class="text-[11px] text-[var(--muted-foreground,#94a3b8)] mb-2 font-medium">Suggested Executive Inquiries:</p>
+          <div class="flex flex-wrap gap-1.5">
+            <button onclick="runCopilotPrompt('Analyze employee EMP-2808')" class="text-[11px] px-2.5 py-1 rounded bg-[var(--background,#0f172a)] hover:bg-slate-800 border border-[var(--border,#334155)] text-slate-300 text-left">
+              🔍 Analyze employee EMP-2808
+            </button>
+            <button onclick="runCopilotPrompt('Who are the top 5 highest risk employees?')" class="text-[11px] px-2.5 py-1 rounded bg-[var(--background,#0f172a)] hover:bg-slate-800 border border-[var(--border,#334155)] text-slate-300 text-left">
+              🚨 Top 5 highest risk employees
+            </button>
+            <button onclick="runCopilotPrompt('How is Sales department doing?')" class="text-[11px] px-2.5 py-1 rounded bg-[var(--background,#0f172a)] hover:bg-slate-800 border border-[var(--border,#334155)] text-slate-300 text-left">
+              🏢 How is Sales department doing?
+            </button>
+            <button onclick="runCopilotPrompt('Generate executive retention report')" class="text-[11px] px-2.5 py-1 rounded bg-[var(--background,#0f172a)] hover:bg-slate-800 border border-[var(--border,#334155)] text-slate-300 text-left">
+              📊 Generate executive retention report
+            </button>
+            <button onclick="runCopilotPrompt('What if we reduce overtime by 50%?')" class="text-[11px] px-2.5 py-1 rounded bg-[var(--background,#0f172a)] hover:bg-slate-800 border border-[var(--border,#334155)] text-slate-300 text-left">
+              🧪 What if we reduce overtime by 50%?
+            </button>
+          </div>
+        </div>
+
+        <!-- Custom Prompt Input -->
+        <div class="mt-4">
+          <label class="block text-xs font-medium text-[var(--muted-foreground,#94a3b8)] mb-1.5">Custom Natural Language Prompt:</label>
+          <div class="flex gap-2">
+            <input type="text" id="copilotInput" placeholder="Ask anything about employee retention, departments, or ROI..."
+                   class="flex-1 bg-[var(--background,#0f172a)] text-xs border border-[var(--border,#334155)] rounded-lg px-3 py-2 focus:outline-none focus:border-blue-500 text-white placeholder-slate-500"
+                   onkeydown="if(event.key==='Enter') executeCopilot()">
+            <button onclick="executeCopilot()" class="px-4 py-2 bg-blue-600 hover:bg-blue-500 text-white rounded-lg text-xs font-semibold transition-colors">
+              Send
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Copilot Response Feed -->
+      <div class="lg:col-span-7 bg-[var(--card,#1e293b)] border border-[var(--border,#334155)] rounded-xl p-5 shadow-sm">
+        <div class="flex items-center justify-between border-b border-[var(--border,#334155)] pb-3 mb-3">
+          <div class="flex items-center gap-2">
+            <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+            <span class="text-xs font-semibold text-white">Agent Response Stream</span>
+          </div>
+          <span class="text-[10px] text-[var(--muted-foreground,#94a3b8)]" id="agentTimestamp">Ready</span>
+        </div>
+
+        <div id="copilotResponse" class="text-xs leading-relaxed text-slate-200 bg-[var(--background,#0f172a)] p-4 rounded-xl border border-[var(--border,#334155)] min-h-[360px] max-h-[460px] overflow-y-auto space-y-3">
+          <p class="text-slate-400 italic">Select a suggested query above or type your own question to activate the HR Retention AI Agent...</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- TAB 5: Intervention Playbooks -->
+  <div id="tab-playbooks" class="tab-content hidden">
+    <div class="bg-[var(--card,#1e293b)] border border-[var(--border,#334155)] rounded-xl p-5 shadow-sm">
+      <div class="flex flex-col md:flex-row md:items-center justify-between gap-3 mb-6">
+        <div>
+          <h2 class="text-base font-semibold text-white">Organizational Retention Policy Playbooks</h2>
+          <p class="text-xs text-[var(--muted-foreground,#94a3b8)]">Evidence-based retention intervention frameworks mapped to root drivers</p>
+        </div>
+        <div class="flex items-center gap-2">
+          <span class="text-xs text-emerald-400 font-semibold">Total Portfolio ROI: 2.27x</span>
+          <span class="text-xs text-[var(--muted-foreground,#94a3b8)]">• Budget: $1.21M</span>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        
+        <!-- Playbook 1 -->
+        <div class="bg-[var(--background,#0f172a)] border border-[var(--border,#334155)] rounded-xl p-4 flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between mb-2">
+              <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-blue-500/20 text-blue-400">Burnout & Overtime</span>
+              <span class="text-[10px] text-emerald-400 font-bold">-35% Flight Risk</span>
+            </div>
+            <h3 class="text-sm font-bold text-white mb-1">Workload Rebalancing & Overtime Cap</h3>
+            <p class="text-xs text-[var(--muted-foreground,#94a3b8)] mb-3">
+              Mandatory 40-hour weekly cap for employees exceeding 15h overtime/mo. Redistribution of secondary projects and temporary contractor coverage.
+            </p>
+            <ul class="text-[11px] text-slate-300 space-y-1 mb-3 list-disc list-inside">
+              <li>Cost: ~$2,500 / employee</li>
+              <li>Timeline: Within 48 hours</li>
+              <li>Owner: Direct Manager + HRBP</li>
+            </ul>
+          </div>
+          <div class="text-[10px] text-blue-400 font-semibold border-t border-slate-800 pt-2">
+            Target Cohort: 48 high-overtime staff
+          </div>
+        </div>
+
+        <!-- Playbook 2 -->
+        <div class="bg-[var(--background,#0f172a)] border border-[var(--border,#334155)] rounded-xl p-4 flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between mb-2">
+              <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-400">Compensation</span>
+              <span class="text-[10px] text-emerald-400 font-bold">-45% Flight Risk</span>
+            </div>
+            <h3 class="text-sm font-bold text-white mb-1">Market Compensation Parity Realignment</h3>
+            <p class="text-xs text-[var(--muted-foreground,#94a3b8)] mb-3">
+              Off-cycle base salary adjustment to 1.05x market benchmark for critical contributors below 0.92x market median, plus 1-year retention equity grant.
+            </p>
+            <ul class="text-[11px] text-slate-300 space-y-1 mb-3 list-disc list-inside">
+              <li>Cost: ~$8,000 - $18,000 / employee</li>
+              <li>Timeline: Next payroll cycle</li>
+              <li>Owner: Compensation Committee & VP</li>
+            </ul>
+          </div>
+          <div class="text-[10px] text-emerald-400 font-semibold border-t border-slate-800 pt-2">
+            Target Cohort: 41 underpaid contributors
+          </div>
+        </div>
+
+        <!-- Playbook 3 -->
+        <div class="bg-[var(--background,#0f172a)] border border-[var(--border,#334155)] rounded-xl p-4 flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between mb-2">
+              <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-purple-500/20 text-purple-400">Leadership & Culture</span>
+              <span class="text-[10px] text-emerald-400 font-bold">-25% Flight Risk</span>
+            </div>
+            <h3 class="text-sm font-bold text-white mb-1">Skip-Level 1-on-1s & Mentorship</h3>
+            <p class="text-xs text-[var(--muted-foreground,#94a3b8)] mb-3">
+              Confidential skip-level alignment with Director/VP, executive coach pairing, and optional lateral rotation for strained team dynamics.
+            </p>
+            <ul class="text-[11px] text-slate-300 space-y-1 mb-3 list-disc list-inside">
+              <li>Cost: ~$1,500 / employee (coaching)</li>
+              <li>Timeline: Within 5 business days</li>
+              <li>Owner: Senior Director & HRBP</li>
+            </ul>
+          </div>
+          <div class="text-[10px] text-purple-400 font-semibold border-t border-slate-800 pt-2">
+            Target Cohort: 32 low-satisfaction staff
+          </div>
+        </div>
+
+        <!-- Playbook 4 -->
+        <div class="bg-[var(--background,#0f172a)] border border-[var(--border,#334155)] rounded-xl p-4 flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between mb-2">
+              <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-amber-500/20 text-amber-400">Career Growth</span>
+              <span class="text-[10px] text-emerald-400 font-bold">-30% Flight Risk</span>
+            </div>
+            <h3 class="text-sm font-bold text-white mb-1">Accelerated Career Pathway & Upskilling</h3>
+            <p class="text-xs text-[var(--muted-foreground,#94a3b8)] mb-3">
+              Formalize fast-track promotion milestones, allocate $3,000 executive L&D conference budget, and assign high-visibility strategic project lead.
+            </p>
+            <ul class="text-[11px] text-slate-300 space-y-1 mb-3 list-disc list-inside">
+              <li>Cost: ~$3,000 / employee</li>
+              <li>Timeline: Within 10 business days</li>
+              <li>Owner: L&D Specialist & Functional Lead</li>
+            </ul>
+          </div>
+          <div class="text-[10px] text-amber-400 font-semibold border-t border-slate-800 pt-2">
+            Target Cohort: 27 stagnant tenure staff
+          </div>
+        </div>
+
+        <!-- Playbook 5 -->
+        <div class="bg-[var(--background,#0f172a)] border border-[var(--border,#334155)] rounded-xl p-4 flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between mb-2">
+              <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-teal-500/20 text-teal-400">Flexibility</span>
+              <span class="text-[10px] text-emerald-400 font-bold">-20% Flight Risk</span>
+            </div>
+            <h3 class="text-sm font-bold text-white mb-1">Hybrid & Remote Work Flexibility</h3>
+            <p class="text-xs text-[var(--muted-foreground,#94a3b8)] mb-3">
+              Authorize 80%-100% remote flexibility with ergonomic home office grant for employees facing >25-mile daily commutes.
+            </p>
+            <ul class="text-[11px] text-slate-300 space-y-1 mb-3 list-disc list-inside">
+              <li>Cost: ~$800 / employee</li>
+              <li>Timeline: Immediate</li>
+              <li>Owner: People Operations</li>
+            </ul>
+          </div>
+          <div class="text-[10px] text-teal-400 font-semibold border-t border-slate-800 pt-2">
+            Target Cohort: 19 long-commute staff
+          </div>
+        </div>
+
+        <!-- Playbook 6 -->
+        <div class="bg-[var(--background,#0f172a)] border border-[var(--border,#334155)] rounded-xl p-4 flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between mb-2">
+              <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-rose-500/20 text-rose-400">Executive Briefing</span>
+              <span class="text-[10px] text-purple-400 font-bold">C-Suite Oversight</span>
+            </div>
+            <h3 class="text-sm font-bold text-white mb-1">Bi-Weekly Retention Governance</h3>
+            <p class="text-xs text-[var(--muted-foreground,#94a3b8)] mb-3">
+              Continuous model re-scoring cadence upon weekly HRIS data ingestion. Automated executive alerts whenever employee flight risk crosses 65%.
+            </p>
+            <ul class="text-[11px] text-slate-300 space-y-1 mb-3 list-disc list-inside">
+              <li>Cost: $0 (Automated in Antigravity)</li>
+              <li>Timeline: Ongoing automated cron</li>
+              <li>Owner: Chief People Officer</li>
+            </ul>
+          </div>
+          <div class="text-[10px] text-rose-400 font-semibold border-t border-slate-800 pt-2">
+            Governance: 100% Workforce Monitored
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- Notification Toast -->
+  <div id="toast" class="fixed bottom-5 right-5 bg-blue-600 text-white text-xs font-semibold px-4 py-3 rounded-xl shadow-lg border border-blue-400 transform translate-y-20 opacity-0 transition-all duration-300 flex items-center gap-2">
+    <span>✅</span>
+    <span id="toastMsg">Action plan dispatched to Manager & HRBP!</span>
+  </div>
+
+  <!-- Client-side Interactive Logic & Data Store -->
+  <script>
+    // Rich Sample Employee Data extracted directly from scored_employees.csv
+    const employees = [
+      { id: "EMP-3073", name: "Chloe Wilson", dept: "Sales", role: "Sales Development Rep", salary: 62000, risk: 0.990, tier: "High Risk", exposure: 46500, tenure: 1.5,
+        driver: "Excessive Weekly Workload (54.9 hrs/wk) (+1.05)",
+        shap: [
+          { factor: "Weekly Workload (54.9 hrs/wk)", val: 1.05, pos: true },
+          { factor: "High Overtime (48.2 hrs/mo)", val: 0.88, pos: true },
+          { factor: "High Composite Disengagement", val: 0.65, pos: true },
+          { factor: "Below Market Pay (0.82x ratio)", val: 0.42, pos: true },
+          { factor: "Tenure Buffer", val: -0.18, pos: false }
+        ],
+        actions: [
+          { cat: "Workload & Burnout", desc: "Cap weekly hours at 40h and reassign inbound lead routing to junior support.", cost: 2500 },
+          { cat: "Compensation", desc: "Market salary bump to $72,000 (1.05x parity) + commission floor guarantee.", cost: 10000 },
+          { cat: "Leadership", desc: "Weekly 1-on-1 skip-level mentorship with VP of Sales.", cost: 1500 }
+        ],
+        postRisk: 0.142, roi: "2.1x"
+      },
+      { id: "EMP-2840", name: "Morgan Martin", dept: "Sales", role: "Senior Account Executive", salary: 134800, risk: 0.989, tier: "High Risk", exposure: 101100, tenure: 0.7,
+        driver: "Excessive Weekly Workload (51.0 hrs/wk) (+0.92)",
+        shap: [
+          { factor: "Weekly Workload (51.0 hrs/wk)", val: 0.92, pos: true },
+          { factor: "Severe Overtime Burnout Ratio", val: 0.78, pos: true },
+          { factor: "Overtime Hours (47.2 hrs/mo)", val: 0.74, pos: true },
+          { factor: "Flight Risk Survey Pulse", val: 0.52, pos: true },
+          { factor: "High Base Salary", val: -0.22, pos: false }
+        ],
+        actions: [
+          { cat: "Workload Rebalancing", desc: "Transfer 2 enterprise pipeline accounts to co-owner; strictly restrict weekend triage.", cost: 3000 },
+          { cat: "Retention Equity", desc: "Issue $25,000 2-year vesting retention restricted stock grant.", cost: 12500 }
+        ],
+        postRisk: 0.168, roi: "2.8x"
+      },
+      { id: "EMP-2920", name: "Chloe Lewis", dept: "Sales", role: "Account Executive", salary: 119800, risk: 0.987, tier: "High Risk", exposure: 89850, tenure: 1.2,
+        driver: "Excessive Weekly Workload (57.4 hrs/wk) (+0.98)",
+        shap: [
+          { factor: "Weekly Workload (57.4 hrs/wk)", val: 0.98, pos: true },
+          { factor: "Severe Overtime Ratio", val: 0.81, pos: true },
+          { factor: "Work-Life Balance (1/5)", val: 0.61, pos: true },
+          { factor: "High Commission Tier", val: -0.15, pos: false }
+        ],
+        actions: [
+          { cat: "Workload Cap", desc: "Enforce strict 40-hour limit and allocate SDR support.", cost: 2500 },
+          { cat: "Wellness Grant", desc: "Provide flexible remote work options + wellness grant.", cost: 1200 }
+        ],
+        postRisk: 0.155, roi: "2.9x"
+      },
+      { id: "EMP-2992", name: "Carlos Rodriguez", dept: "Data & AI", role: "Lead Data Architect", salary: 170500, risk: 0.986, tier: "High Risk", exposure: 127875, tenure: 4.8,
+        driver: "High Composite Disengagement (+1.03)",
+        shap: [
+          { factor: "Composite Disengagement Score", val: 1.03, pos: true },
+          { factor: "Low Manager Relationship (1/5)", val: 0.75, pos: true },
+          { factor: "Career Stagnation (>3y no promo)", val: 0.58, pos: true },
+          { factor: "High Equity Holding", val: -0.31, pos: false }
+        ],
+        actions: [
+          { cat: "Executive Skip-Level", desc: "Confidential skip-level with CTO; discuss architectural initiative ownership.", cost: 1500 },
+          { cat: "Career Promotion", desc: "Fast-track review for Principal Architect in upcoming cycle.", cost: 8000 }
+        ],
+        postRisk: 0.125, roi: "3.4x"
+      },
+      { id: "EMP-2821", name: "Maya Jackson", dept: "Marketing", role: "Marketing Lead", salary: 188400, risk: 0.984, tier: "High Risk", exposure: 141300, tenure: 7.3,
+        driver: "Excessive Weekly Workload (49.9 hrs/wk) (+1.04)",
+        shap: [
+          { factor: "Excessive Workload (49.9 hrs/wk)", val: 1.04, pos: true },
+          { factor: "Severe Overtime (40.8 hrs/mo)", val: 0.90, pos: true },
+          { factor: "Disengagement Score", val: 0.86, pos: true },
+          { factor: "Stock Options Buffer", val: -0.28, pos: false }
+        ],
+        actions: [
+          { cat: "Workload Relief", desc: "Assign dedicated content associate; offload brand management tasks.", cost: 4000 },
+          { cat: "Executive Sabbatical / Bonus", desc: "Approve 2-week paid recharge sabbatical + retention bonus.", cost: 15000 }
+        ],
+        postRisk: 0.138, roi: "2.6x"
+      },
+      { id: "EMP-2833", name: "Emma Taylor", dept: "Engineering", role: "Staff Engineer", salary: 185600, risk: 0.955, tier: "High Risk", exposure: 139200, tenure: 0.7,
+        driver: "Excessive Weekly Workload (56.5 hrs/wk) (+1.06)",
+        shap: [
+          { factor: "Weekly Hours (56.5 hrs/wk)", val: 1.06, pos: true },
+          { factor: "Severe Overtime Burnout Ratio", val: 1.04, pos: true },
+          { factor: "High Monthly Overtime (56.9 hrs/mo)", val: 0.74, pos: true },
+          { factor: "High Base Salary", val: -0.25, pos: false }
+        ],
+        actions: [
+          { cat: "Workload Rebalancing", desc: "Remove from on-call escalation rotation; assign junior engineer to triaging.", cost: 3500 },
+          { cat: "Tech Lead Track", desc: "Formalize Staff+ mentorship scope and leadership autonomy.", cost: 2000 }
+        ],
+        postRisk: 0.140, roi: "3.1x"
+      },
+      { id: "EMP-2831", name: "Liam Thompson", dept: "Marketing", role: "Content Strategist", salary: 83800, risk: 0.897, tier: "High Risk", exposure: 62850, tenure: 1.9,
+        driver: "Excessive Weekly Workload (52.6 hrs/wk) (+1.21)",
+        shap: [
+          { factor: "Weekly Hours (52.6 hrs/wk)", val: 1.21, pos: true },
+          { factor: "Overtime (50.5 hrs/mo)", val: 0.69, pos: true },
+          { factor: "Severe Burnout Ratio", val: 0.68, pos: true }
+        ],
+        actions: [
+          { cat: "Agency Support", desc: "Contract fractional copywriter to absorb 40% of campaign workload.", cost: 3000 },
+          { cat: "Salary Adjustment", desc: "Adjust base salary to $95,000 market standard.", cost: 11200 }
+        ],
+        postRisk: 0.150, roi: "2.0x"
+      },
+      { id: "EMP-2808", name: "Maya Harris", dept: "Product", role: "Senior Product Manager", salary: 143800, risk: 0.767, tier: "High Risk", exposure: 107850, tenure: 6.0,
+        driver: "High Composite Disengagement (+0.83)",
+        shap: [
+          { factor: "Composite Disengagement", val: 0.83, pos: true },
+          { factor: "Flight Risk Survey Pulse", val: 0.69, pos: true },
+          { factor: "Absenteeism (8 sick days)", val: 0.36, pos: true },
+          { factor: "Below Market Pay (0.85x)", val: 0.32, pos: true },
+          { factor: "Weekly Workload Normal", val: -0.48, pos: false }
+        ],
+        actions: [
+          { cat: "Compensation Benchmark", desc: "Realignment from $143,800 to $169,176 (1.00x market parity) + equity grant.", cost: 25376 },
+          { cat: "Skip-Level Mentorship", desc: "Bi-weekly skip-level 1-on-1 with VP of Product; pair with senior executive mentor.", cost: 1500 },
+          { cat: "Promotion Pathway", desc: "Formalize Q4 milestone for Group Product Manager promotion review.", cost: 3000 }
+        ],
+        postRisk: 0.115, roi: "1.17x"
+      },
+      { id: "EMP-2844", name: "Priya Ramirez", dept: "Engineering", role: "Engineering Manager", salary: 145200, risk: 0.718, tier: "High Risk", exposure: 108900, tenure: 9.0,
+        driver: "Below Market Pay (0.79x ratio) (+0.39)",
+        shap: [
+          { factor: "Below Market Pay (0.79x)", val: 0.39, pos: true },
+          { factor: "High Overtime Burnout", val: 0.37, pos: true },
+          { factor: "Flight Risk Pulse", val: 0.47, pos: true }
+        ],
+        actions: [
+          { cat: "Market Realignment", desc: "Increase base salary to $168,000 market rate + retention bonus.", cost: 22800 },
+          { cat: "Management Coaching", desc: "Executive leadership coaching and workload redistribution.", cost: 2000 }
+        ],
+        postRisk: 0.135, roi: "1.4x"
+      },
+      { id: "EMP-2802", name: "Ananya Jones", dept: "Engineering", role: "Senior Software Engineer", salary: 122000, risk: 0.577, tier: "Medium Risk", exposure: 91500, tenure: 8.0,
+        driver: "Below Market Pay (0.76x ratio) (+0.38)",
+        shap: [
+          { factor: "Below Market Pay (0.76x)", val: 0.38, pos: true },
+          { factor: "High Composite Disengagement", val: 0.36, pos: true },
+          { factor: "Low Job Satisfaction (2/5)", val: 0.24, pos: true }
+        ],
+        actions: [
+          { cat: "Market Equity Review", desc: "Targeted 12% salary adjustment and project rotation.", cost: 14640 }
+        ],
+        postRisk: 0.180, roi: "1.9x"
+      },
+      { id: "EMP-2836", name: "David Harris", dept: "Customer Support", role: "Support Manager", salary: 115000, risk: 0.536, tier: "Medium Risk", exposure: 86250, tenure: 6.7,
+        driver: "Excessive Absenteeism (11 sick days) (+0.65)",
+        shap: [
+          { factor: "Absenteeism Spike (11 sick days)", val: 0.65, pos: true },
+          { factor: "Disengagement Score", val: 0.35, pos: true },
+          { factor: "Unexplained Absences (4 days)", val: 0.26, pos: true }
+        ],
+        actions: [
+          { cat: "Health & Well-being", desc: "Confidential HRBP check-in; authorize flexible hybrid scheduling.", cost: 1000 }
+        ],
+        postRisk: 0.160, roi: "2.5x"
+      },
+      { id: "EMP-2812", name: "Daniel Wilson", dept: "Customer Support", role: "Support Manager", salary: 96900, risk: 0.492, tier: "Medium Risk", exposure: 72675, tenure: 2.0,
+        driver: "Elevated Flight Risk Survey Pulse (+0.67)",
+        shap: [
+          { factor: "Flight Risk Pulse", val: 0.67, pos: true },
+          { factor: "Below Market Pay (0.87x)", val: 0.20, pos: true }
+        ],
+        actions: [
+          { cat: "Pulse Follow-up", desc: "Quarterly engagement review with Support Director.", cost: 800 }
+        ],
+        postRisk: 0.190, roi: "2.2x"
+      },
+      { id: "EMP-2827", name: "Siddharth Brown", dept: "Sales", role: "Sales Director", salary: 176400, risk: 0.482, tier: "Medium Risk", exposure: 132300, tenure: 5.7,
+        driver: "High Composite Disengagement (+0.44)",
+        shap: [
+          { factor: "Composite Disengagement", val: 0.44, pos: true },
+          { factor: "Sick Days Taken (10 days)", val: 0.33, pos: true }
+        ],
+        actions: [
+          { cat: "Executive Alignment", desc: "Q4 sales quota realignment and territory restructuring.", cost: 2000 }
+        ],
+        postRisk: 0.175, roi: "3.2x"
+      },
+      { id: "EMP-2804", name: "Aisha Davis", dept: "Customer Support", role: "Technical Support Engineer", salary: 72900, risk: 0.419, tier: "Medium Risk", exposure: 54675, tenure: 2.0,
+        driver: "Elevated Flight Risk Survey Pulse (+0.78)",
+        shap: [
+          { factor: "Flight Risk Pulse", val: 0.78, pos: true },
+          { factor: "Base Salary Level", val: 0.29, pos: true }
+        ],
+        actions: [
+          { cat: "Career Pathing", desc: "Map Tier 3 escalation engineering promotion criteria.", cost: 1200 }
+        ],
+        postRisk: 0.150, roi: "2.3x"
+      },
+      { id: "EMP-2800", name: "Avery White", dept: "Engineering", role: "Software Engineer", salary: 93600, risk: 0.095, tier: "Low Risk", exposure: 70200, tenure: 3.8,
+        driver: "High Overtime (16.5 hrs/mo) (+0.19)",
+        shap: [
+          { factor: "High Job Satisfaction (4/5)", val: -0.45, pos: false },
+          { factor: "Strong Manager Alignment (4/5)", val: -0.38, pos: false },
+          { factor: "Overtime (16.5 hrs/mo)", val: 0.19, pos: true }
+        ],
+        actions: [
+          { cat: "Standard Cadence", desc: "Maintain bi-weekly 1-on-1s and standard merit cycle.", cost: 0 }
+        ],
+        postRisk: 0.080, roi: "N/A"
+      },
+      { id: "EMP-2806", name: "Avery Garcia", dept: "HR", role: "HR Business Partner", salary: 120500, risk: 0.006, tier: "Low Risk", exposure: 90375, tenure: 1.2,
+        driver: "Market Parity (1.22x) (-0.62)",
+        shap: [
+          { factor: "Above Market Pay (1.22x)", val: -0.62, pos: false },
+          { factor: "High Skill Growth Score", val: -0.48, pos: false },
+          { factor: "Stock Options Buffer", val: -0.35, pos: false }
+        ],
+        actions: [
+          { cat: "High Retention Anchor", desc: "Recognize as culture ambassador; standard annual review.", cost: 0 }
+        ],
+        postRisk: 0.005, roi: "N/A"
+      }
+    ];
+
+    // Department Aggregates
+    const departments = [
+      { name: "Sales", headcount: 68, highRisk: 24, avgRisk: 42.8, exposure: 2180000, topDriver: "Severe Overtime (44h/mo) & Workload" },
+      { name: "Customer Support", headcount: 52, highRisk: 14, avgRisk: 34.6, exposure: 1040000, topDriver: "Absenteeism & Shift Burnout" },
+      { name: "Marketing", headcount: 34, highRisk: 10, avgRisk: 35.1, exposure: 980000, topDriver: "Overallocated Project Pressure" },
+      { name: "Product", headcount: 44, highRisk: 11, avgRisk: 31.9, exposure: 1150000, topDriver: "Below-Market Parity (0.86x)" },
+      { name: "Engineering", headcount: 95, highRisk: 14, avgRisk: 24.3, exposure: 1220000, topDriver: "On-Call & Weekend Overtime" },
+      { name: "Data & AI", headcount: 28, highRisk: 4, avgRisk: 22.8, exposure: 490000, topDriver: "Career Stagnation / Growth" },
+      { name: "Operations", headcount: 17, highRisk: 2, avgRisk: 19.5, exposure: 125000, topDriver: "Compensation Benchmark" },
+      { name: "HR", headcount: 12, highRisk: 1, avgRisk: 11.2, exposure: 80000, topDriver: "Workload Alignment" }
+    ];
+
+    // Global SHAP drivers
+    const globalDrivers = [
+      { name: "Excessive Overtime Hours / Mo", shap: 0.742, pct: 95, color: "bg-rose-500" },
+      { name: "Workload Pressure Index (Hrs × Projects)", shap: 0.684, pct: 88, color: "bg-rose-500" },
+      { name: "Below-Market Salary Disparity", shap: 0.612, pct: 79, color: "bg-amber-500" },
+      { name: "Flight-Risk Survey Sentiment Pulse", shap: 0.589, pct: 75, color: "bg-rose-500" },
+      { name: "Composite Disengagement Score", shap: 0.521, pct: 67, color: "bg-amber-500" },
+      { name: "Career Stagnation (>3y without promo)", shap: 0.443, pct: 57, color: "bg-blue-500" },
+      { name: "Stress Absenteeism / Sick Days", shap: 0.382, pct: 49, color: "bg-blue-500" }
+    ];
+
+    // Render Employee Table
+    function renderEmployeeTable(list) {
+      const tbody = document.getElementById("employeeTableBody");
+      tbody.innerHTML = "";
+      
+      list.forEach(emp => {
+        const badgeClass = emp.tier === "High Risk" ? "badge-high" : (emp.tier === "Medium Risk" ? "badge-med" : "badge-low");
+        const row = document.createElement("tr");
+        row.className = "hover:bg-slate-800/50 cursor-pointer transition-colors";
+        row.onclick = () => selectEmployee(emp.id);
+        
+        row.innerHTML = `
+          <td class="py-2.5 px-3">
+            <div class="font-bold text-white">${emp.name}</div>
+            <div class="text-[10px] text-[var(--muted-foreground,#94a3b8)]">${emp.id} • ${emp.tenure} yrs</div>
+          </td>
+          <td class="py-2.5 px-3">
+            <div class="text-slate-200">${emp.dept}</div>
+            <div class="text-[10px] text-[var(--muted-foreground,#94a3b8)]">${emp.role}</div>
+          </td>
+          <td class="py-2.5 px-2">
+            <span class="px-2 py-0.5 rounded text-[11px] font-bold ${badgeClass}">
+              ${(emp.risk * 100).toFixed(1)}%
+            </span>
+          </td>
+          <td class="py-2.5 px-2 font-medium text-slate-300">
+            $${emp.salary.toLocaleString()}
+          </td>
+          <td class="py-2.5 px-3 text-[11px] text-slate-300 truncate max-w-[200px]" title="${emp.driver}">
+            ${emp.driver}
+          </td>
+          <td class="py-2.5 px-2 text-right">
+            <button class="px-2.5 py-1 text-[11px] rounded bg-blue-600/20 hover:bg-blue-600 text-blue-400 hover:text-white transition-colors border border-blue-500/30">
+              Inspect
+            </button>
+          </td>
+        `;
+        tbody.appendChild(row);
+      });
+      document.getElementById("showingCount").innerText = `Showing ${list.length} employee records`;
+    }
+
+    // Filter Logic
+    function filterEmployees() {
+      const q = document.getElementById("empSearch").value.toLowerCase();
+      const tier = document.getElementById("tierFilter").value;
+      const dept = document.getElementById("deptFilter").value;
+      
+      const filtered = employees.filter(emp => {
+        const matchQ = emp.name.toLowerCase().includes(q) || emp.id.toLowerCase().includes(q) || emp.role.toLowerCase().includes(q);
+        const matchTier = tier === "ALL" || emp.tier === tier;
+        const matchDept = dept === "ALL" || emp.dept === dept;
+        return matchQ && matchTier && matchDept;
+      });
+      
+      renderEmployeeTable(filtered);
+    }
+
+    // Select Employee for XAI Detail Panel
+    function selectEmployee(empId) {
+      const emp = employees.find(e => e.id === empId) || employees[0];
+      
+      document.getElementById("detailName").innerText = emp.name;
+      document.getElementById("detailRole").innerText = `${emp.role} • ${emp.dept}`;
+      
+      const badge = document.getElementById("detailBadge");
+      badge.innerText = `${(emp.risk * 100).toFixed(1)}% ${emp.tier}`;
+      badge.className = `px-2.5 py-1 text-xs font-bold rounded-full ${emp.tier === "High Risk" ? "badge-high" : (emp.tier === "Medium Risk" ? "badge-med" : "badge-low")}`;
+      
+      document.getElementById("detailSalary").innerText = `$${emp.salary.toLocaleString()}`;
+      document.getElementById("detailExposure").innerText = `$${emp.exposure.toLocaleString()}`;
+      document.getElementById("detailTenure").innerText = `${emp.tenure} yrs`;
+      document.getElementById("detailRoi").innerText = `ROI: ${emp.roi}`;
+      document.getElementById("postRiskScore").innerText = `${(emp.postRisk * 100).toFixed(1)}%`;
+      
+      // Render SHAP Bars
+      const shapContainer = document.getElementById("shapBarContainer");
+      shapContainer.innerHTML = "";
+      
+      emp.shap.forEach(s => {
+        const barColor = s.pos ? "bg-rose-500" : "bg-emerald-500";
+        const prefix = s.pos ? "+" : "";
+        const widthPct = Math.min(100, Math.max(15, Math.abs(s.val) * 75));
+        
+        const row = document.createElement("div");
+        row.innerHTML = `
+          <div class="flex justify-between text-[11px] mb-1">
+            <span class="text-slate-300 truncate max-w-[200px]" title="${s.factor}">${s.factor}</span>
+            <span class="font-bold ${s.pos ? 'text-rose-400' : 'text-emerald-400'}">${prefix}${s.val.toFixed(2)}</span>
+          </div>
+          <div class="w-full bg-slate-800 rounded-full h-1.5 overflow-hidden">
+            <div class="${barColor} h-1.5 rounded-full" style="width: ${widthPct}%"></div>
+          </div>
+        `;
+        shapContainer.appendChild(row);
+      });
+
+      // Render Interventions
+      const actContainer = document.getElementById("interventionList");
+      actContainer.innerHTML = "";
+      emp.actions.forEach(act => {
+        const div = document.createElement("div");
+        div.className = "p-2 rounded bg-[var(--background,#0f172a)] border border-[var(--border,#334155)]";
+        div.innerHTML = `
+          <div class="flex items-center justify-between text-[10px] font-semibold text-blue-400 mb-0.5">
+            <span>[${act.cat}]</span>
+            <span class="text-slate-400">$${act.cost.toLocaleString()}</span>
+          </div>
+          <p class="text-slate-200 text-[11px] leading-snug">${act.desc}</p>
+        `;
+        actContainer.appendChild(div);
+      });
+    }
+
+    // Render Department Overview
+    function renderDepartments() {
+      const container = document.getElementById("departmentListContainer");
+      container.innerHTML = "";
+      
+      departments.forEach(dept => {
+        const riskPct = dept.avgRisk;
+        const colorClass = riskPct > 35 ? "text-rose-400" : (riskPct > 25 ? "text-amber-400" : "text-emerald-400");
+        const barColor = riskPct > 35 ? "bg-rose-500" : (riskPct > 25 ? "bg-amber-500" : "bg-emerald-500");
+        
+        const card = document.createElement("div");
+        card.className = "p-4 rounded-xl bg-[var(--background,#0f172a)] border border-[var(--border,#334155)] hover:border-slate-600 transition-colors";
+        card.innerHTML = `
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-2">
+            <div>
+              <span class="text-base font-bold text-white">${dept.name}</span>
+              <span class="text-xs text-[var(--muted-foreground,#94a3b8)] ml-2">(${dept.headcount} active employees)</span>
+            </div>
+            <div class="flex items-center gap-3">
+              <span class="text-xs text-rose-400 font-bold">${dept.highRisk} at High Risk</span>
+              <span class="text-xs font-bold ${colorClass}">Avg Risk: ${riskPct.toFixed(1)}%</span>
+            </div>
+          </div>
+
+          <div class="w-full bg-slate-800 rounded-full h-2 mb-2 overflow-hidden">
+            <div class="${barColor} h-2 rounded-full" style="width: ${riskPct * 2}%"></div>
+          </div>
+
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between text-xs text-[var(--muted-foreground,#94a3b8)]">
+            <span>Primary Stressor: <strong class="text-slate-300">${dept.topDriver}</strong></span>
+            <span class="font-semibold text-amber-300">Replacement Exposure: $${(dept.exposure / 1000000).toFixed(2)}M</span>
+          </div>
+        `;
+        container.appendChild(card);
+      });
+
+      // Render Global SHAP Bars
+      const globalContainer = document.getElementById("globalShapContainer");
+      globalContainer.innerHTML = "";
+      globalDrivers.forEach(d => {
+        const item = document.createElement("div");
+        item.innerHTML = `
+          <div class="flex justify-between text-xs mb-1">
+            <span class="text-slate-300 font-medium">${d.name}</span>
+            <span class="font-bold text-slate-200">|${d.shap}|</span>
+          </div>
+          <div class="w-full bg-slate-800 rounded-full h-2 overflow-hidden">
+            <div class="${d.color} h-2 rounded-full" style="width: ${d.pct}%"></div>
+          </div>
+        `;
+        globalContainer.appendChild(item);
+      });
+    }
+
+    // What-If Scenario Calculation
+    function runSimulation() {
+      const otPct = parseInt(document.getElementById("sliderOt").value);
+      const compPct = parseInt(document.getElementById("sliderComp").value);
+      const coachPct = parseInt(document.getElementById("sliderCoach").value);
+      
+      document.getElementById("sliderOtVal").innerText = `-${otPct}% Overtime`;
+      document.getElementById("sliderCompVal").innerText = `+${compPct}% Salary Parity`;
+      document.getElementById("sliderCoachVal").innerText = `${coachPct}% Team Coverage`;
+      
+      // Calculate modeled reduction
+      const otFactor = (otPct / 100) * 0.32;
+      const compFactor = (compPct / 25) * 0.28;
+      const coachFactor = (coachPct / 100) * 0.18;
+      const totalMitigation = Math.min(0.72, otFactor + compFactor + coachFactor);
+      
+      const baselineHighRisk = 80;
+      const simulatedHighRisk = Math.round(baselineHighRisk * (1.0 - totalMitigation));
+      const delta = baselineHighRisk - simulatedHighRisk;
+      const preserved = Math.round(delta * 1.05);
+      
+      const avgSalary = 117000;
+      const grossSavings = Math.round(preserved * avgSalary * 0.75);
+      const interventionCost = Math.round((preserved * 9500) + (compPct * 22000));
+      const netBenefit = grossSavings - interventionCost;
+      const roi = Math.max(1.2, (netBenefit / (interventionCost + 1)).toFixed(2));
+      
+      document.getElementById("simHighRisk").innerText = simulatedHighRisk;
+      document.getElementById("simRiskDelta").innerText = `-${delta} (-${((delta/baselineHighRisk)*100).toFixed(1)}%)`;
+      document.getElementById("simPreserved").innerText = preserved;
+      document.getElementById("simSavings").innerText = `$${(grossSavings / 1000000).toFixed(2)}M`;
+      document.getElementById("simRoi").innerText = `${roi}x`;
+      
+      document.getElementById("simNarrative").innerHTML = `
+        Implementing a <strong>${otPct}% overtime reduction</strong>, a <strong>+${compPct}% salary benchmark adjustment</strong>, and <strong>${coachPct}% skip-level alignment</strong> prevents approximately <strong>${preserved} departures</strong>, preserving <strong>$${grossSavings.toLocaleString()}</strong> in avoided replacement loss.
+      `;
+    }
+
+    function resetSliders() {
+      document.getElementById("sliderOt").value = 50;
+      document.getElementById("sliderComp").value = 10;
+      document.getElementById("sliderCoach").value = 75;
+      runSimulation();
+    }
+
+    // AI Retention Copilot NLP Simulator
+    function runCopilotPrompt(text) {
+      document.getElementById("copilotInput").value = text;
+      executeCopilot();
+    }
+
+    function executeCopilot() {
+      const input = document.getElementById("copilotInput").value.trim();
+      if (!input) return;
+      
+      const feed = document.getElementById("copilotResponse");
+      document.getElementById("agentTimestamp").innerText = "Just now";
+      
+      const userBubble = document.createElement("div");
+      userBubble.className = "p-3 rounded-lg bg-blue-900/30 border border-blue-700/50 text-white font-medium";
+      userBubble.innerHTML = `<span class="text-blue-400 font-bold">Query:</span> ${input}`;
+      feed.appendChild(userBubble);
+      
+      const q = input.toLowerCase();
+      let responseHtml = "";
+      
+      if (q.includes("emp-2808") || q.includes("maya harris")) {
+        responseHtml = `
+          <div class="font-bold text-white mb-1">### Retention Diagnosis: Maya Harris (EMP-2808)</div>
+          <p class="text-slate-300"><strong>Role:</strong> Senior Product Manager (Product) • <strong>Tenure:</strong> 6.0 yrs</p>
+          <p class="text-slate-300"><strong>Attrition Risk Score:</strong> <span class="text-rose-400 font-bold">76.7% (High Risk)</span> • Replacement Cost: <strong>$107,850</strong></p>
+          <div class="mt-2 text-slate-300">
+            <strong>Key Root Drivers (SHAP XAI):</strong><br>
+            • ⚠️ High Composite Disengagement (+0.83)<br>
+            • ⚠️ Flight-Risk Pulse Score (+0.69)<br>
+            • ⚠️ Below-Market Pay Disparity (0.85x ratio) (+0.32)<br>
+            • ⚠️ Stress Absenteeism (8 sick days) (+0.36)
+          </div>
+          <div class="mt-2 text-emerald-400 font-medium">
+            <strong>Prescribed Action Plan:</strong><br>
+            1. Compensation adjustment from $143,800 to $169,176 (1.00x parity) + equity grant.<br>
+            2. Bi-weekly skip-level 1-on-1 with VP of Product + Senior Executive Mentor.<br>
+            3. Formalize Group Product Manager promotion milestone in Q4.<br>
+            <strong>Expected Post-Intervention Risk:</strong> 11.5% | <strong>ROI:</strong> 1.17x ($37,937 net savings).
+          </div>
+        `;
+      } else if (q.includes("top 5") || q.includes("highest risk")) {
+        responseHtml = `
+          <div class="font-bold text-white mb-2">### Top 5 Critical Flight Risks Across Organization</div>
+          <div class="space-y-1.5 text-slate-300">
+            <div>1. <strong>Chloe Wilson</strong> (Sales • SDR) — <span class="text-rose-400 font-bold">99.0%</span> | Exposure: $46,500 | Driver: 54.9h weekly workload</div>
+            <div>2. <strong>Morgan Martin</strong> (Sales • Senior AE) — <span class="text-rose-400 font-bold">98.9%</span> | Exposure: $101,100 | Driver: 47.2h monthly overtime</div>
+            <div>3. <strong>Chloe Lewis</strong> (Sales • AE) — <span class="text-rose-400 font-bold">98.7%</span> | Exposure: $89,850 | Driver: 57.4h weekly hours</div>
+            <div>4. <strong>Carlos Rodriguez</strong> (Data & AI • Lead Architect) — <span class="text-rose-400 font-bold">98.6%</span> | Exposure: $127,875 | Driver: Strained management alignment</div>
+            <div>5. <strong>Maya Jackson</strong> (Marketing • Lead) — <span class="text-rose-400 font-bold">98.4%</span> | Exposure: $141,300 | Driver: 49.9h weekly workload</div>
+          </div>
+          <p class="mt-2 text-amber-300"><strong>Combined Top 5 Replacement Exposure:</strong> $506,625</p>
+        `;
+      } else if (q.includes("sales")) {
+        responseHtml = `
+          <div class="font-bold text-white mb-1">### Department Diagnostics: Sales</div>
+          <p class="text-slate-300">• <strong>Active Headcount:</strong> 68 employees (24 at High Risk / 35.3%)</p>
+          <p class="text-slate-300">• <strong>Mean Department Risk:</strong> <span class="text-rose-400 font-bold">42.8%</span> (Highest across enterprise)</p>
+          <p class="text-slate-300">• <strong>Financial Replacement Exposure:</strong> $2,180,000</p>
+          <p class="text-slate-300">• <strong>Root Drivers:</strong> Severe monthly overtime (avg 44.1h), aggressive deal-closing pressure, high commission volatility.</p>
+          <p class="mt-2 text-emerald-400"><strong>Recommended Playbook:</strong> Cap individual monthly overtime at 25h, implement quota relief co-ownership on tier-1 deals, and introduce 6-month commission floors for top performers.</p>
+        `;
+      } else if (q.includes("executive report") || q.includes("board")) {
+        responseHtml = `
+          <div class="font-bold text-white mb-1">### Executive Workforce Health & Retention Briefing</div>
+          <p class="text-slate-300">• <strong>Workforce Size:</strong> 350 active employees across 8 departments.</p>
+          <p class="text-slate-300">• <strong>High Attrition Risk (Action Required):</strong> 80 employees (22.9%).</p>
+          <p class="text-slate-300">• <strong>Total Replacement Capital Exposed:</strong> $7,035,225 in recruiting and vacancy disruption.</p>
+          <p class="text-slate-300">• <strong>Model Assurance:</strong> XGBoost (ROC-AUC: 0.8735, Recall: 68.7%).</p>
+          <p class="text-slate-300">• <strong>Strategic Retention Investment:</strong> $1,214,142 across comp, L&D, and workload relief.</p>
+          <p class="text-emerald-400 font-bold mt-1">• Net Avoided Loss: $2,756,685 (Portfolio ROI: 2.27x).</p>
+        `;
+      } else {
+        responseHtml = `
+          <div class="font-bold text-white mb-1">### Workforce Intelligence Synthesis</div>
+          <p class="text-slate-300">Based on ML evaluation of 350 employee records across Core HRIS, Workload, Pulse Surveys, and L&D data:</p>
+          <p class="text-slate-300 mt-1">• <strong>80 employees</strong> are currently in the High Risk tier (>65% probability), representing <strong>$7,035,225</strong> in turnover replacement exposure.</p>
+          <p class="text-slate-300 mt-1">• Primary corporate vulnerabilities are concentrated in <strong>Sales (42.8% avg risk)</strong> and <strong>Customer Support (34.6% avg risk)</strong> driven by severe overtime and compensation disparity.</p>
+          <p class="text-emerald-400 mt-1">• Proposed targeted interventions yield an estimated <strong>2.27x net ROI</strong> ($2.76M net savings).</p>
+        `;
+      }
+      
+      const agentBubble = document.createElement("div");
+      agentBubble.className = "p-3.5 rounded-lg bg-slate-800/80 border border-slate-700/60 leading-relaxed text-slate-200";
+      agentBubble.innerHTML = responseHtml;
+      feed.appendChild(agentBubble);
+      
+      feed.scrollTop = feed.scrollHeight;
+      document.getElementById("copilotInput").value = "";
+    }
+
+    // Switch Navigation Tabs
+    function switchTab(tabId) {
+      document.querySelectorAll(".tab-content").forEach(el => el.classList.add("hidden"));
+      document.querySelectorAll(".tab-content").forEach(el => el.classList.remove("block"));
+      document.querySelectorAll(".tab-btn").forEach(el => el.classList.remove("active"));
+      
+      const activeContent = document.getElementById(`tab-${tabId}`);
+      if (activeContent) {
+        activeContent.classList.remove("hidden");
+        activeContent.classList.add("block");
+      }
+      
+      const activeBtn = Array.from(document.querySelectorAll(".tab-btn")).find(b => b.getAttribute("onclick").includes(tabId));
+      if (activeBtn) activeBtn.classList.add("active");
+    }
+
+    // Dispatch Action Plan Toast
+    function dispatchIntervention() {
+      const toast = document.getElementById("toast");
+      toast.classList.remove("translate-y-20", "opacity-0");
+      setTimeout(() => {
+        toast.classList.add("translate-y-20", "opacity-0");
+      }, 3500);
+    }
+
+    // Initialization
+    window.addEventListener("DOMContentLoaded", () => {
+      renderEmployeeTable(employees.filter(e => e.tier === "High Risk"));
+      selectEmployee("EMP-3073");
+      renderDepartments();
+      runSimulation();
+    });
+  </script>
+
+</body>
+</html>
